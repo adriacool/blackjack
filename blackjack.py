@@ -35,11 +35,32 @@ def calc_score(hand):
                 score += 1    
     return(score)      
 
+def hit_me(hand):
+    hand.append(deck.pop(randint(0, len(deck)-1)))
+    return hand    
+
+def dealer_play(hand):
+    score = calc_score(hand)
+    while score < 17:
+        hand = hit_me(hand)
+        score = calc_score(hand)
+    print("Dealer's hand:", hand)    
+    return(hand)  
+
+def player_play(hand):
+    play = ' '
+    while (play.lower() != 'h') and (play.lower() != 's'):
+        play = input("Type S for stay. Type H for hit me. ")
+    else: 
+        if (play.lower() == 'h'):
+            hand = hit_me(hand)
+        print("Your hand:", hand)  
+    return(hand, play.lower())    
 
 deck = make_deck(suits, nums)
 dealer_hand = deal_hand(deck)
 player_hand = deal_hand(deck)
 print("Dealer showing: ",dealer_hand[1])
 print("Your hand: ", player_hand)
-print(calc_score(player_hand))
+
 
