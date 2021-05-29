@@ -62,5 +62,20 @@ dealer_hand = deal_hand(deck)
 player_hand = deal_hand(deck)
 print("Dealer showing: ",dealer_hand[1])
 print("Your hand: ", player_hand)
-
+choice = ' '      
+while (calc_score(player_hand) < 21) and (choice != 's'):
+    choice = player_play(player_hand)[1]  
+player_score = calc_score(player_hand)
+if player_score > 21:
+    print(player_score, 'BUST')
+else:
+    print(player_score)
+    dealer_play(dealer_hand)
+    dealer_score = calc_score(dealer_hand)
+    if dealer_score > 21:
+        print(dealer_score, "Dealer BUSTS. You WIN!")
+    elif dealer_score >= player_score:
+        print(dealer_score, "Dealer Wins!")
+    else:
+        print(dealer_score,"\nYou WIN!")
 
